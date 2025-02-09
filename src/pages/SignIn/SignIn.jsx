@@ -1,38 +1,36 @@
+import React, { useContext, useState } from "react";
+import loginLottieData from "../../assets/Animation2.json";
 import Lottie from "lottie-react";
-import registerLottieData from "../../assets/Animation1.json";
-import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 
-const Register = () => {
-  const { createUser } = useContext(AuthContext);
+const SignIn = () => {
+  const { signInUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+    console.log(email, password);
 
-    createUser(email, password)
+    signInUser(email, password)
       .then((result) => {
-        console.log(result);
-        setError(null);
-        form.reset();
+        console.log("sign in ", result.user);
       })
       .catch((error) => {
-        setError(error.message);
+        console.log(error);
       });
   };
-
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left w-96">
-          <Lottie animationData={registerLottieData}></Lottie>
+          <Lottie animationData={loginLottieData}></Lottie>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-          <form className="card-body" onSubmit={handleSubmit}>
-            <h1 className="text-5xl font-bold">Register now!</h1>
+          <form className="card-body" onSubmit={handleSignIn}>
+            <h1 className="text-5xl font-bold">Sign In now!</h1>
 
             <div className="form-control">
               <label className="label">
@@ -70,7 +68,7 @@ const Register = () => {
             )}
 
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Register</button>
+              <button className="btn btn-primary">Sign In</button>
             </div>
           </form>
         </div>
@@ -79,4 +77,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;

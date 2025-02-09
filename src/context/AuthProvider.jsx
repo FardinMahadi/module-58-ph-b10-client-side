@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import auth from "../firebase/firebase.init";
 
@@ -24,10 +25,16 @@ const AuthProvider = ({ children }) => {
       });
   };
 
+  const signInUser = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (createUser) => {
-      setUser(createUser);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
       setLoading(false);
+      console.log("state captured ", user);
     });
 
     return () => {
@@ -39,6 +46,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createUser,
+    signInUser,
   };
 
   return (
