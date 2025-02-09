@@ -1,7 +1,12 @@
 import Lottie from "lottie-react";
 import registerLottieData from "../../assets/Animation1.json";
+import { useContext, useState } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -12,13 +17,21 @@ const Register = () => {
     // password validation:
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
     if (!passwordRegex.test(password)) {
-      alert(
+      setError(
         "Password must be at least 6 characters long, with at least one uppercase letter and one number."
       );
       return;
     }
-    alert("Registration successful!");
-    form.reset();
+
+    createUser(email, password)
+      .then((result) => {
+        console.log(result);
+        setError(null);
+        form.reset();
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -60,6 +73,12 @@ const Register = () => {
                 </a>
               </label>
             </div>
+            {error && (
+              <div className="alert alert-error shadow-lg my-2">
+                <span>{error}</span>
+              </div>
+            )}
+
             <div className="form-control mt-6">
               <button className="btn btn-primary">Register</button>
             </div>
