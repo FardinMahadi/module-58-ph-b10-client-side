@@ -1,17 +1,30 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("Successful sign out");
+      })
+      .catch((error) => {
+        console.log("Failed to sign out. Stay here. Don't leave me alone");
+      });
+  };
 
   const links = (
     <>
       <li>
-        <a>Item 1</a>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <a>Item 3</a>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/">Home</NavLink>
       </li>
     </>
   );
@@ -42,14 +55,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">Jop Portal</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end flex gap-2">
         {user ? (
-          <button className="btn btn-error">Log Out</button>
+          <button onClick={handleSignOut} className="btn btn-error">
+            Log Out
+          </button>
         ) : (
           <>
             <Link to="signin">
