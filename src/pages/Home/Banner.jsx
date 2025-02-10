@@ -23,7 +23,7 @@ const Banner = () => {
         </div>
         <div className="flex-1">
           <motion.h1
-            animate={{ x: 50 }}
+            animate={{ x: [0, 50, 0] }}
             transition={{
               duration: 2,
               delay: 1,
