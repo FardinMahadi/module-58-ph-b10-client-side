@@ -3,9 +3,11 @@ import { AiOutlineCalendar, AiOutlineMail } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import { FaDollarSign, FaMoneyBills } from "react-icons/fa6";
 import { MdWorkOutline } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const HotJobCard = ({ job }) => {
   const {
+    _id,
     title,
     company,
     company_logo,
@@ -87,9 +89,12 @@ const HotJobCard = ({ job }) => {
 
         {/* Apply Button */}
         <div className="card-actions justify-end">
-          <button className="btn px-6 py-3 font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105">
-            Apply Now
-          </button>
+          <Link
+            to={`/jobs/${_id}`}
+            className="btn px-6 py-3 font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105"
+          >
+            Apply
+          </Link>
         </div>
       </div>
     </div>

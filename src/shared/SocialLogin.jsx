@@ -1,15 +1,18 @@
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const SocialLogin = () => {
+const SocialLogin = ({ from }) => {
   const { googleSignIn, setUser, loading, setLoading } =
     useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
       const result = await googleSignIn();
       setUser(result.user);
+      navigate(from);
     } catch (error) {
       console.error("Google sign-in failed:", error.message);
     } finally {
