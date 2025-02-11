@@ -11,10 +11,8 @@ const MyApplications = () => {
       .then((data) => setJobs(data));
   }, [user.email]);
 
-  console.log(jobs);
   return (
     <div>
-      <h2 className="text-3xl">My Applications: {jobs.length}</h2>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -22,8 +20,6 @@ const MyApplications = () => {
             <tr>
               <th>Name</th>
               <th>Job</th>
-              <th>Favorite Color</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -33,7 +29,7 @@ const MyApplications = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img src={job.company_log} />
+                        <img src={job.company_logo} />
                       </div>
                     </div>
                     <div>
@@ -49,10 +45,6 @@ const MyApplications = () => {
                     Desktop Support Technician
                   </span>
                 </td>
-                <td>Purple</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
-                </th>
               </tr>
             ))}
           </tbody>
