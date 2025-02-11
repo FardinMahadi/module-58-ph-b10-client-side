@@ -56,7 +56,7 @@ const HotJobCard = ({ job }) => {
                 status === "new" ? "badge-success" : "badge-info"
               }`}
             >
-              {status.toUpperCase()}
+              {status}
             </span>
           </h2>
           <p className="mt-2">{description}</p>
