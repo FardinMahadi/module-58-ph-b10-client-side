@@ -11,11 +11,8 @@ const MyPostedJobs = () => {
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);
-        console.log(user.email);
       });
   }, [user.email]);
-
-  console.log(jobs);
 
   return (
     <div>
