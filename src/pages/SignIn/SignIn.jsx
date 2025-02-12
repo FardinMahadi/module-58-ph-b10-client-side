@@ -22,11 +22,15 @@ const SignIn = () => {
     signInUser(email, password)
       .then((result) => {
         console.log("sign in ", result.user.email);
-        const user = { email: email };
 
-        axios.post("http://localhost:5000/jwt", user).then((data) => {
-          console.log(data.data);
-        });
+        const user = { email: result.user.email };
+
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+          });
+
         // navigate(from);
       })
       .catch((error) => {
